@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Convite para a Rafa 💌</title>
+  <style>
+    /* --- Estilo da página --- */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #ffe6e6, #fff0f5);
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #d1006f;
+      font-size: 3rem;
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      position: relative;
+      width: 300px;
+      height: 150px;
+    }
+
+    button {
+      font-size: 1.5rem;
+      padding: 15px 35px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      position: absolute;
+    }
+
+    #yes {
+      background-color: #ff4d88;
+      color: white;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    #yes:hover {
+      background-color: #ff6699;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    #no {
+      background-color: #f0f0f0;
+      color: #333;
+      left: 180px;
+      top: 50%;
+      transform: translateY(-50%);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: absolute;
+    }
+
+    audio {
+      display: none;
+    }
+
+    /* Corações flutuantes */
+    .heart {
+      position: fixed;
+      width: 25px;
+      height: 25px;
+      background-color: #ff4d88;
+      transform: rotate(-45deg);
+      animation: floatUp linear forwards;
+      opacity: 0.8;
+      pointer-events: none;
+      z-index: 1000;
+    }
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background-color: #ff4d88;
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -12.5px;
+      left: 0;
+    }
+    .heart::after {
+      left: 12.5px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(-45deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-150px) rotate(-45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Rafa, quer sair comigo? 💕</h1>
+
+  <div class="buttons">
+    <button id="yes">Sim ❤️</button>
+    <button id="no">Não</button>
+  </div>
+
+  <audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <script>
+    const noBtn = document.getElementById('no');
+    const yesBtn = document.getElementById('yes');
+
+    // Faz o botão "Não" fugir do cursor
+    noBtn.addEventListener('mouseover', () => {
+      const padding = 20;
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding * 2) + padding;
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding * 2) + padding;
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      noBtn.style.position = 'fixed';
+    });
+
+    // Redireciona para WhatsApp no botão "Sim"
+    yesBtn.addEventListener('click', () => {
+      window.location.href = "https://api.whatsapp.com/send?phone=5547992350804&text=Sim,+quero+sair+com+você+hoje!+💖";
+    });
+
+    // Função para criar corações flutuantes
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = (window.innerHeight - 30) + 'px';
+      heart.style.animationDuration = 3 + Math.random() * 2 + 's';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    // Cria corações a cada 400ms
+    setInterval(createHeart, 400);
+  </script>
+
+</body>
+</html>
